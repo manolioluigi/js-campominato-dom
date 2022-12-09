@@ -1,9 +1,8 @@
 //Dichiariamo le variabili
 
-let bottone;
+let bottone, bomba, difficolta;
 let flag = false;
 const griglia = document.getElementById('griglia');
-const bombe = ['']
 
 //Creiamo la funziona per la il cubetto
 
@@ -14,8 +13,19 @@ function creaCubetto(){
 }
 
 //Creiamo la funziona che genera le bombe
-function creaBomba(){
+function creaBomba(difficolta){
+    
+    let bombe = [];
+    let i = 0;
+    while(i < 16){
+        bomba = Math.floor(Math.random() * (difficolta - 1 + 1) + 1 );
+        if(!bombe.includes(bomba)){
+            bombe.push(bomba);
+            i++;
+        }
+    }
 
+    return bombe;
 }
 
 
@@ -24,13 +34,17 @@ function creaBomba(){
 bottone = document.getElementById("play");
 bottone.addEventListener(`click`, function(){
 
+    let arrayBombe = [];
     griglia.innerHTML = " ";
 
-        for(let i = 1; i<=100; i++){
-            
-            //bomba
-            
+        difficolta = 100;
 
+        //bombe 
+        arrayBombe = creaBomba(difficolta);
+        console.log(arrayBombe);
+
+        for(let i = 1; i<=difficolta; i++){
+            
             //cubo
             const cubetto = creaCubetto();
             cubetto.addEventListener('click', function(){
