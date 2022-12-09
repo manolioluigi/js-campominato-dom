@@ -1,6 +1,7 @@
 //Dichiariamo le variabili
 
 let bottone, bomba, difficolta;
+let contatore = 0;
 let flag = false;
 const griglia = document.getElementById('griglia');
 
@@ -36,6 +37,7 @@ bottone.addEventListener(`click`, function(){
 
     let arrayBombe = [];
     griglia.innerHTML = " ";
+    griglia.classList.remove('pointer-events');
 
         difficolta = 100;
 
@@ -48,12 +50,25 @@ bottone.addEventListener(`click`, function(){
             //cubo
             const cubetto = creaCubetto();
             cubetto.addEventListener('click', function(){
-                this.classList.add('background-blue');
-                console.log("Ho cliccato la casella: "+i);
+
+                if(!arrayBombe.includes(i)){
+                    this.classList.add('background-blue');
+                    console.log("Ho cliccato la casella: "+i);
+                    contatore++;
+                }else{
+                    this.classList.add('background-red');
+                    console.log("Hai perso");
+                    griglia.classList.add('pointer-events');
+                    alert("Peccato, hai perso! Il tuo punteggio è: "+contatore);
+                }
             })
             cubetto.innerText = i;
             griglia.appendChild(cubetto);
             
+        }
+
+        if(contatore == difficolta - 16){
+            alert("Complimenti! Hai vinto!");
         }
 
 }

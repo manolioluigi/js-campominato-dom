@@ -44,6 +44,10 @@ button{
     width: 100px;
 }
 
+.pointer-events{
+    pointer-events: none;
+}
+
 /*Utility*/
 
 .height-full{
@@ -52,6 +56,10 @@ button{
 
 .background-blue{
     background-color: rgb(0, 89, 255);
+}
+
+.background-red{
+    background-color: red;
 }
 
 .padding-sides-30{
