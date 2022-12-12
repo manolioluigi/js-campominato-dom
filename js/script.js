@@ -1,9 +1,9 @@
 //Dichiariamo le variabili
 
-let bottone, bomba, difficolta;
+let bottone, bomba, difficolta, cellePerRiga, celleTotali, select;
 let contatore = 0;
 let flag = false;
-const griglia = document.getElementById('griglia');
+const griglia = document.querySelector('.griglia');
 
 //Creiamo la funziona per la il cubetto
 
@@ -14,12 +14,12 @@ function creaCubetto(){
 }
 
 //Creiamo la funziona che genera le bombe
-function creaBomba(difficolta){
+function creaBomba(cellePerRiga){
     
     let bombe = [];
     let i = 0;
-    while(i < 16){
-        bomba = Math.floor(Math.random() * (difficolta - 1 + 1) + 1 );
+    while(i < cellePerRiga){
+        bomba = Math.floor(Math.random() * (cellePerRiga - 1 + 1) + 1 );
         if(!bombe.includes(bomba)){
             bombe.push(bomba);
             i++;
@@ -39,14 +39,38 @@ bottone.addEventListener(`click`, function(){
     griglia.innerHTML = " ";
     griglia.classList.remove('pointer-events');
 
-        difficolta = 100;
+        difficolta = parseInt(document.getElementById(`difficolta`).value);
+        griglia.className = '';
+        console.log(difficolta);
+        switch(difficolta){
+            case 1:
+                celleTotali = 100;
+                cellePerRiga = 10;
+                griglia.classList.add(`griglia`);
+                break;
+            case 2:
+                celleTotali = 81;
+                cellePerRiga = 9;
+                griglia.classList.add(`griglia-media`);
+                break;
+            case 3:
+                celleTotali = 49;
+                cellePerRiga = 7;
+                griglia.classList.add(`griglia-piccola`);
+                break;
+            default:
+                celleTotali = 100;
+                cellePerRiga = 10;
+                griglia.classList.add(`griglia`);
+                break;
+        }
 
         //bombe 
-        arrayBombe = creaBomba(difficolta);
+        arrayBombe = creaBomba(cellePerRiga);
         console.log(arrayBombe);
 
-        for(let i = 1; i<=difficolta; i++){
-            
+        for(let i = 1; i<=celleTotali; i++){
+            console.log(celleTotali);
             //cubo
             const cubetto = creaCubetto();
             cubetto.addEventListener('click', function(){
@@ -67,7 +91,7 @@ bottone.addEventListener(`click`, function(){
             
         }
 
-        if(contatore == difficolta - 16){
+        if(contatore == celleTotali - 16){
             alert("Complimenti! Hai vinto!");
         }
 

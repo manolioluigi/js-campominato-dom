@@ -18,8 +18,22 @@ footer{
     height: 5vh;
 }
 
-#griglia{
+.griglia{
     width: 1000px;
+    margin: 5vh auto 5vh auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.griglia-media{
+    width: 900px;
+    margin: 5vh auto 5vh auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.griglia-piccola{
+    width: 700px;
     margin: 5vh auto 5vh auto;
     display: flex;
     flex-wrap: wrap;
